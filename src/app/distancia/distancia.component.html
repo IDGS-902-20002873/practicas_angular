@@ -1,0 +1,19 @@
+<div class="contenedor">
+    <h1>Distancia entre dos puntos</h1><br>
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="x1" placeholder="X 1">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="y1" placeholder="Y 1">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="x2" placeholder="X 2">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="y2" placeholder="Y 2">
+    </mat-form-field>
+    <button (click)="calcular()" mat-raised-button color="primary">Calcular</button>
+    <br>
+    <h1><p>El resultado es: {{resultado}}</p></h1>
+</div>

@@ -1,0 +1,52 @@
+<h1 class="mt-3">Resistencias</h1>
+<hr>
+<div class="contenedor">
+    <img src="https://www.logicbus.com.mx/blog/wp-content/uploads/2019/07/codigo-colores-resistencias-e1563802288271.jpg">
+    <br>
+    <label class="form-label">Banda 1</label>
+    <select name="miselect" [(ngModel)]="banda1" (change)="calcular()" [style.background-color]="lista1[banda1]">
+        <option [value]="indice1" *ngFor="let item of lista1 let indice1=index;"
+        [style.background-color]="item">{{item}}</option>
+    </select>
+    <label class="form-label mt-2">Banda 2</label>
+    <select name="miselect" [(ngModel)]="banda2" (change)="calcular()" [style.background-color]="lista1[banda2]">
+        <option [value]="indice1" *ngFor="let item of lista1 let indice1=index;"
+        [style.background-color]="item">{{item}}</option>
+    </select>
+    <label class="form-label mt-2">Banda 3</label>
+    <select name="miselect" [(ngModel)]="banda3" (change)="calcular()" [style.background-color]="lista1[banda3]">
+        <option [value]="indice1" *ngFor="let item of lista1 let indice1=index;"
+        [style.background-color]="item">{{item}}</option>
+    </select>
+    <h3 class="mt-4">Tolerancia</h3>
+    <mat-radio-group name="tolerancia" [(ngModel)]="tolerancia" >
+        <mat-radio-button *ngFor="let op of tipoTolerancia" [value]="op" name="tolerancia" style="margin:10px;">
+          {{op}}
+        </mat-radio-button>
+    </mat-radio-group>
+    <button class="mt-3" mat-raised-button color="primary" (click)="calcular()">Calcular</button>
+</div>
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th>Banda 1</th>
+            <th>Banda 2</th>
+            <th>Banda 3</th>
+            <th>Tolerancia</th>
+            <th>Valor</th>
+            <th>Minimo</th>
+            <th>Maximo</th>
+            <th>Porcentaje</th>
+        </tr>
+    </thead>
+    <tbody>
+        <th [style.background-color]="lista1[banda1]">{{lista1[banda1]}}</th>
+        <th [style.background-color]="lista1[banda2]">{{lista1[banda2]}}</th>
+        <th [style.background-color]="lista1[banda3]">{{lista1[banda3]}}</th>
+        <th [style.background-color]="tolerancia">{{tolerancia}}</th>
+        <th>{{valor}} ohms</th>
+        <th>{{minimo}} ohms</th>
+        <th>{{maximo}} ohms</th>
+        <th>{{porcentaje}} %</th>
+    </tbody>
+</table>
