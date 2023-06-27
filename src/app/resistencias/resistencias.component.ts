@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./resistencias.component.css']
 })
 export class ResistenciasComponent {
-  lista1: string[] = ['Black', 'Brown', 'Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Violet', 'Gray', 'White'];
+  lista: string[] = ['Black', 'Brown', 'Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Violet', 'Gray', 'White'];
   tipoTolerancia: string[] = ['Gold', 'Silver'];
   banda1: number = 0;
   banda2: number = 0;
@@ -33,8 +33,8 @@ export class ResistenciasComponent {
       'Silver': 0.10
     };
 
-    let valor1 = colores[this.lista1[this.banda1]];
-    let valor2 = colores[this.lista1[this.banda2]];
+    let valor1 = colores[this.lista[this.banda1]];
+    let valor2 = colores[this.lista[this.banda2]];
     let multiplicador = Math.pow(10, this.banda3);
 
     this.valor = (valor1 * 10 + valor2) * multiplicador;
@@ -46,7 +46,7 @@ export class ResistenciasComponent {
     } else if (this.tolerancia === 'Silver') {
       this.minimo = this.valor - (this.valor * 0.10);
       this.maximo = this.valor + (this.valor * 0.10);
-      this.porcentaje = 10
+      this.porcentaje = 10;
     }
   }
 }
