@@ -7,6 +7,7 @@ import { MenuComponent } from './menu/menu.component';
 import { DistanciaModuloModule } from './distancia/distancia-modulo/distancia-modulo.module';
 import { CinepolisModuloModule } from './cinepolis/cinepolis-modulo/cinepolis-modulo.module';
 import { ResistenciasModuloModule } from './resistencias/resistencias-modulo/resistencias-modulo.module';
+import { AppRoutingModule } from './app.routing.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ResistenciasModuloModule } from './resistencias/resistencias-modulo/res
     BrowserAnimationsModule,
     DistanciaModuloModule,
     CinepolisModuloModule,
-    ResistenciasModuloModule
+    ResistenciasModuloModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
