@@ -8,6 +8,8 @@ import { DistanciaModuloModule } from './distancia/distancia-modulo/distancia-mo
 import { CinepolisModuloModule } from './cinepolis/cinepolis-modulo/cinepolis-modulo.module';
 import { ResistenciasModuloModule } from './resistencias/resistencias-modulo/resistencias-modulo.module';
 import { AppRoutingModule } from './app.routing.module';
+import { PizzasModule } from './pizzas/pizzas-modulo/pizzas.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { AppRoutingModule } from './app.routing.module';
     DistanciaModuloModule,
     CinepolisModuloModule,
     ResistenciasModuloModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PizzasModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

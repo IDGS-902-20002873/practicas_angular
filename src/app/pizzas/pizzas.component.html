@@ -1,0 +1,156 @@
+<h1 class="mt-3">Pizzas</h1>
+<hr class="border border-secondary border-3 opacity-75">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <div class="mb-4">
+                <label class="form-label">
+                    <h4>Tamaño de pizza:</h4>
+                </label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" [(ngModel)]="selectedSize" name="pizza_size"
+                        [value]="'Chica'">
+                    <label class="form-check-label" for="small">
+                        Chica $40
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" [(ngModel)]="selectedSize" name="pizza_size"
+                        [value]="'Mediana'">
+                    <label class="form-check-label" for="medium">
+                        Mediana $80
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" [(ngModel)]="selectedSize" name="pizza_size"
+                        [value]="'Grande'">
+                    <label class="form-check-label" for="large">
+                        Grande $120
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="mb-4">
+                <label class="form-label">
+                    <h4>Ingredientes:</h4>
+                </label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="ingredients" [(ngModel)]="ham">
+                    <label class="form-check-label" for="check_ham">
+                        Jamon $10
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="ingredients" [(ngModel)]="pineapple">
+                    <label class="form-check-label" for="check_pineapple">
+                        Piña $10
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="ingredients" [(ngModel)]="mushroom">
+                    <label class="form-check-label" for="check_mushroom">
+                        Champiñones $10
+                    </label>
+                </div>
+            </div>
+        </div>
+        <form class="row col-8" (ngSubmit)="onSubmit()" [formGroup]="pizzaForm">
+            <div class="col-6">
+                <div class="mb-4">
+                    <label for="name" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="name" formControlName="name">
+                    <div *ngIf="pizzaForm.get('name')?.touched && 
+                pizzaForm.get('name')?.errors?.['required']" 
+                class="alert alert-danger">Este campo es requerido</div>
+                </div>
+                <div class="mb-4">
+                    <label for="address" class="form-label">Dirección</label>
+                    <input type="text" class="form-control" id="address" formControlName="address">
+                    <div *ngIf="pizzaForm.get('address')?.touched && 
+                pizzaForm.get('address')?.errors?.['required']" class="alert alert-danger">Este campo es requerido
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="d-grid gap-2 col-12">
+                        <button class="btn btn-success btn-md" type="submit">
+                            {{edit?'Actualizar':'Guardar'}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-4">
+                    <label for="phone_number" class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" id="phone_number" formControlName="phone_number">
+                </div>
+                <div class="mb-4">
+                    <label for="num_pizza" class="form-label">Número de pizzas</label>
+                    <input type="number" class="form-control" id="num_pizza" formControlName="num_pizza">
+                </div>
+            </div>
+        </form>
+    </div>
+    
+
+    <hr class="border border-secondary border-3 opacity-75">
+    <div class="row">
+        <div class="col-7">
+            <table class="table table-bordered">
+                <thead class="table-secondary">
+                    <tr class="text-center">
+                        <th></th>
+                        <th>Tamaño</th>
+                        <th>Ingredientes</th>
+                        <th>Número de pizzas</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pizza of pizzas; let i = index">
+                        <td class="text-center">
+                            <button class="btn btn-info" (click)="showEditPizza(pizza)"><i class="bi bi-pencil"></i></button>
+                            <button *ngIf="delete" class="btn btn-danger" (click)="removePizza(i)"><i class="bi bi-trash"></i></button>
+                        </td>
+                        <td>{{pizza.pizza_size}}</td>
+                        <td>
+                            <ul>
+                                <li *ngIf="pizza.ingredients.ham">Jamon</li>
+                                <li *ngIf="pizza.ingredients.pineapple">Piña</li>
+                                <li *ngIf="pizza.ingredients.mushroom">Champiñones</li>
+                            </ul>
+                        </td>
+                        <td>1</td>
+                        <td>${{pizza.subtotal}}.00</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button (click)="showDelete()" class="btn btn-danger" type="button">
+                    {{delete?'Ocultar':'Quitar'}}</button>
+                <button class="btn btn-success" (click)="showVentas()" type="button">Terminar</button>
+            </div>
+        </div>
+        <div class="col-5" *ngIf="total>0">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h4 class="mt-2 fw-bold">Ventas del día</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-hover">
+                        <tbody *ngFor="let venta of ventas">
+                            <tr>
+                                <td class="col-9">{{venta.name}}</td>
+                                <td class="col-3">${{venta.subtotal}}.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-center">
+                    <p class="card-text fw-bold">Ventas totales del día: ${{total}}.00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="border border-secondary border-3 opacity-75">
+    
+</div>
